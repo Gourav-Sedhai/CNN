@@ -14,6 +14,10 @@ classifier.add(Convolution2D(32, 3, 3, input_shape = (64, 64, 3), activation = '
 # Step 2 - Pooling
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
+# Adding a second convolutional layer
+classifier.add(Convolution2D(64, 3, 3, activation = 'relu'))
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
 # Steop 3 - Flattening
 classifier.add(Flatten())
 
@@ -45,10 +49,10 @@ test_set = test_datagen.flow_from_directory('test_set',
                                             class_mode='binary')
 
 classifier.fit(training_set,
-               steps_per_epoch=int(8000/32),
+               steps_per_epoch=8000,
                epochs=25,
                validation_data=test_set,
-               validation_steps=int(2000/32))
+               validation_steps=2000)
 
 
 
